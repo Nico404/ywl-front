@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouWriteLike</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-200">
+  <header class="flex items-center justify-between bg-gray-800 p-4 text-white">
+    <div class="flex items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white mr-2" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12.014 6.54s2.147-3.969 3.475-6.54l8.511 8.511c-2.583 1.321-6.556 3.459-6.556 3.459l-5.43-5.43zm-8.517 6.423s-1.339 5.254-3.497 8.604l.827.826 3.967-3.967c.348-.348.569-.801.629-1.288.034-.27.153-.532.361-.74.498-.498 1.306-.498 1.803 0 .498.499.498 1.305 0 1.803-.208.209-.469.328-.74.361-.488.061-.94.281-1.288.63l-3.967 3.968.826.84c3.314-2.133 8.604-3.511 8.604-3.511l4.262-7.837-3.951-3.951-7.836 4.262z" />
+      </svg>
+
+      <h1 class="text-lg font-bold">YouWriteLike</h1>
+    </div>
+    <a href="#" class="text-white">Learn More</a>
+  </header>
+
+  <main class="container mx-auto p-8">
+    <p class="text-center items-center">YouWriteLike is an AI Bot that will match your writing style with some of the most influential authors out there. </br>
+      We have built two classification models that can predict which writer's style is closest to your own writing style. </br> The first one is an RNN trained from scratch on 10 classes, and the second one is built on top of Hugging Face's pretrained BERT model </br> with a custom head and 40 authors. Now, play, write, and learn!</p>
+
+    <div class="mt-4 flex justify-center">
+      <label class="inline-flex items-center">
+        <input type="radio" class="form-radio" name="model" value="GRUtenberg">
+        <span class="ml-2">GRUtenberg</span>
+      </label>
+      <label class="inline-flex items-center ml-4">
+        <input type="radio" class="form-radio" name="model" value="GutenBERT">
+        <span class="ml-2">GutenBERT</span>
+      </label>
+    </div>
+
+    <div class="flex mt-8">
+      <div class="w-1/2 pr-4">
+        <textarea class="w-full h-64 resize-y border border-gray-400 rounded px-4 py-2 focus:outline-none max-h-full"
+          placeholder="Enter text..."></textarea>
+        <button id="submitBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 mt-2 rounded w-full">
+          Submit</button>
+      </div>
+      <div class="w-1/2 pl-4">
+        <div id="results" class="bg-white h-64 border border-gray-400 rounded p-4">
+          <!-- Display results here -->
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="text-center py-4">
+    <p class="underline">Built with &#x2764;&#xFE0F; by LeWagon/Batch_1214</p>
+  </footer>
+
+  <script>
+    document.getElementById("submitBtn").addEventListener("click", function () {
+      var text = document.querySelector("textarea").value;
+      var model = document.querySelector('input[name="model"]:checked').value;
+
+      var data = {
+        text: text,
+        model: model
+      };
+
+      fetch("http://127.0.0.1:8002/predict_bert?text=lalala", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          // Update the results div with the response from the API
+          document.getElementById("results").textContent = JSON.stringify(data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    });
+  </script>
+</body>
+
+</html>
