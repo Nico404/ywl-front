@@ -13,7 +13,7 @@ def main():
     """)
 
     # Display the logo centered
-    st.image("assets/logo.png", width=500, use_column_width=True)
+    st.image("assets/logo.png", width=400, use_column_width=True)
 
     # Display the text input field
     text = st.text_area("Enter Text")
@@ -33,7 +33,7 @@ def main():
 def display_predictions(predictions):
     # Display avatars and top 3 predictions with probabilities
     st.write("Top 3 Predictions:")
-    avatar_size = 300
+    avatar_size = 200
     for i, (author, prob) in enumerate(predictions.items()):
         if i >= 3:
             break
