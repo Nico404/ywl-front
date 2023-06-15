@@ -1,7 +1,5 @@
 import streamlit as st
 import requests
-import streamlit as st
-import requests
 
 def main():
     # Streamlit app title
@@ -9,7 +7,7 @@ def main():
 
     # Display the description
     st.markdown("""
-    YouWriteLike is an application that will match your writing style with some of the most influential authors out there.
+    YouWriteLike is an AI Bot that will match your writing style with some of the most influential authors out there.
     We have built classification models that can predict which writer's style is closest to your own writing style.
     Now, play, write, and learn!
     """)
@@ -40,10 +38,9 @@ def display_predictions(predictions):
             break
 
         # Display avatar
-        st.image(f"assets/avatar_{author}.jpg", width=50, caption=author)
-
-        # # Display probability
-        # st.write(f"Probability: {prob}")
+        image_path = f"assets/avatar_{author}.jpg"
+        avatar_caption = f"#{i + 1} - {author}"
+        st.image(image_path, width=150, caption=avatar_caption)
 
 if __name__ == "__main__":
     main()
