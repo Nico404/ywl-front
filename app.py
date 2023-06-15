@@ -21,7 +21,7 @@ def main():
 
     # Display the submit button
     if st.button("Submit"):
-        url = 'http://127.0.0.1:1234/predict_bert?text='
+        url = 'https://youwritelike-5i2zktz67q-ew.a.run.app/predict_bert?text='
         response = requests.post(url + text)
 
         if response.status_code == 200:
