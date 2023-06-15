@@ -42,8 +42,8 @@ def display_predictions(predictions):
         # Display avatar
         st.image(f"assets/avatar_{author}.jpg", width=50, caption=author)
 
-        # Display probability
-        st.write(f"Probability: {prob}")
+        # # Display probability
+        # st.write(f"Probability: {prob}")
 
 if __name__ == "__main__":
     main()
