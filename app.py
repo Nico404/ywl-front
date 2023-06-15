@@ -13,7 +13,7 @@ def main():
     """)
 
     # Display the logo centered
-    st.image("assets/logo.png", width=400, use_column_width=True)
+    st.image("assets/logo.png", width=200, use_column_width=True)
 
     # Display the text input field
     text = st.text_area("Enter Text")
