@@ -33,7 +33,7 @@ def main():
 def display_predictions(predictions):
     # Display avatars and top 3 predictions with probabilities
     st.write("Top 3 Predictions:")
-    avatar_size = 200
+    avatar_size = 150
     for i, (author, prob) in enumerate(predictions.items()):
         if i >= 3:
             break
