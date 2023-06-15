@@ -40,7 +40,7 @@ def display_predictions(predictions):
             break
 
         # Display avatar
-        st.image(f"assets/avatar_{author.lower()}.png", width=50, caption=author)
+        st.image(f"assets/avatar_{author}.jpg", width=50, caption=author)
 
         # Display probability
         st.write(f"Probability: {prob}")
