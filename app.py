@@ -16,21 +16,21 @@ def main():
     # Display the logo centered
     st.image("assets/logo.png", width=500, use_column_width=True)
 
-    # Display the radio button for model selection
-    model = st.radio("Select Model", ("GRUtenberg", "GutenBERT"))
-
     # Display the text input field
     text = st.text_area("Enter Text")
 
     # Display the submit button
     if st.button("Submit"):
-        # Perform the API request and display the results
-        url = 'http://127.0.0.1:8002/predict_bert?text='
-        # print(url + text)
-        requests.post(url + text)
+        url = 'http://127.0.0.1:1234/predict_bert?text='
+        response = requests.post(url + text)
 
-        # Replace this with your API request code
-        st.success("Submitted!")
+        if response.status_code == 200:
+            result = response.json()
+            st.success("Prediction Result:")
+            st.write(result)
+        else:
+            st.error("Error occurred during prediction.")
+
 
 if __name__ == "__main__":
     main()
