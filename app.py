@@ -7,8 +7,8 @@ def main():
 
     # Display the description
     st.markdown("""
-    YouWriteLike is an AI Bot that will match your writing style with some of the most influential authors out there.
-    We have built classification models that can predict which writer's style is closest to your own writing style.
+    YouWriteLike is an AI classifier that will match your writing style with some of the most influential authors out there.
+    We have built a model that can predict which writer's style is closest to your own writing style.
     Now, play, write, and learn!
     """)
 
@@ -34,14 +34,25 @@ def display_predictions(predictions):
     # Display avatars and top 3 predictions with probabilities
     st.write("Top 3 Predictions:")
     avatar_size = 128
+
+    # Create columns for images and predictions
+    col1, col2, col3 = st.beta_columns(3)
+
     for i, (author, prob) in enumerate(predictions.items()):
         if i >= 3:
             break
 
-        # Display avatar
+        # Display avatar and prediction in respective columns
         image_path = f"assets/avatar_{author}.jpg"
         avatar_caption = f"#{i + 1} - {author}"
-        st.image(image_path, width=avatar_size, caption=avatar_caption, use_column_width=False, output_format="auto")
+        with col1:
+            st.image(image_path, width=avatar_size, caption=avatar_caption, use_column_width=False, output_format="auto")
+
+        with col2:
+            st.write("")  # Empty column for spacing
+
+        with col3:
+            st.write(f"Probability: {prob}")
 
 if __name__ == "__main__":
     main()
