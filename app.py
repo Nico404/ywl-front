@@ -30,20 +30,32 @@ def main():
         else:
             st.error("Error occurred during prediction.")
 
+import streamlit as st
+import matplotlib.pyplot as plt
+
 def display_predictions(predictions):
     # Display avatars and top 3 predictions with probabilities
     st.write("Top 3 Predictions:")
-    avatar_size = 128
-    for i, (author, prob) in enumerate(predictions.items()):
-        if i >= 3:
-            break
 
-        # Display avatar
-        image_path = f"assets/avatar_{author}.jpg"
-        avatar_caption = f"#{i + 1} - {author}"
-        # Create a sub-container for each prediction
-        with st.beta_container():
-            st.image(image_path, width=image_width, caption=avatar_caption, use_column_width=False, output_format="auto")
+    # Create a single row layout
+    row_layout = st.beta_container()
+
+    # Set the width of each image
+    image_width = 128
+
+    with row_layout:
+        # Iterate over the predictions
+        for i, (author, prob) in enumerate(predictions.items()):
+            if i >= 3:
+                break
+
+            # Display avatar
+            image_path = f"assets/avatar_{author}.jpg"
+            avatar_caption = f"#{i + 1} - {author}"
+
+            # Create a sub-container for each prediction
+            with st.beta_container():
+                st.image(image_path, width=image_width, caption=avatar_caption, use_column_width=False, output_format="auto")
 
 if __name__ == "__main__":
     main()
