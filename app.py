@@ -41,7 +41,9 @@ def display_predictions(predictions):
         # Display avatar
         image_path = f"assets/avatar_{author}.jpg"
         avatar_caption = f"#{i + 1} - {author}"
-        st.image(image_path, width=avatar_size, caption=avatar_caption, use_column_width=False, output_format="auto")
+        # Create a sub-container for each prediction
+        with st.beta_container():
+            st.image(image_path, width=image_width, caption=avatar_caption, use_column_width=False, output_format="auto")
 
 if __name__ == "__main__":
     main()
