@@ -41,7 +41,8 @@ def display_predictions(predictions):
         # Display avatar
         image_path = f"assets/avatar_{author}.jpg"
         avatar_caption = f"#{i + 1} - {author}"
-        st.image(image_path, width=avatar_size, caption=avatar_caption, use_column_width=False, output_format="auto")
+        col1, col2, col3 = st.columns([0.2, 5, 0.2])
+        col2.image(image_path, width=avatar_size, caption=avatar_caption, use_column_width=False, output_format="auto")
 
 if __name__ == "__main__":
     main()
