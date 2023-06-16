@@ -1,6 +1,5 @@
 import streamlit as st
 import requests
-from PIL import Image
 
 def main():
     # Streamlit app title
@@ -14,7 +13,7 @@ def main():
     """)
 
     # Display the logo centered
-    st.image("assets/logo.png", width=500, use_column_width=True)
+    st.image("assets/logo.png", width=300, use_column_width=True)
 
     # Display the text input field
     text = st.text_area("Enter Text")
@@ -34,23 +33,15 @@ def main():
 def display_predictions(predictions):
     # Display avatars and top 3 predictions with probabilities
     st.write("Top 3 Predictions:")
-    avatar_size = 200
+    avatar_size = 128
     for i, (author, prob) in enumerate(predictions.items()):
         if i >= 3:
             break
 
-        # Resize and display avatar
+        # Display avatar
         image_path = f"assets/avatar_{author}.jpg"
-        resized_image = resize_image(image_path, avatar_size)
         avatar_caption = f"#{i + 1} - {author}"
-        st.image(resized_image, caption=avatar_caption, use_column_width=True, output_format="auto")
-
-def resize_image(image_path, size):
-    image = Image.open(image_path)
-    aspect_ratio = float(size) / max(image.size)
-    new_size = tuple(int(x * aspect_ratio) for x in image.size)
-    resized_image = image.resize(new_size, Image.ANTIALIAS)
-    return resized_image
+        st.image(image_path, width=avatar_size, caption=avatar_caption, use_column_width=True, output_format="auto")
 
 if __name__ == "__main__":
     main()
