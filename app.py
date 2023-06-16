@@ -33,23 +33,15 @@ def main():
 def display_predictions(predictions):
     # Display avatars and top 3 predictions with probabilities
     st.write("Top 3 Predictions:")
-    num_columns = 3
-    num_predictions = min(len(predictions), num_columns)
-
-    # Create columns
-    columns = st.beta_columns(num_columns)
-    avatar_size = 128
-
-    # Display predictions in columns
+    avatar_size = 250
     for i, (author, prob) in enumerate(predictions.items()):
-        if i >= num_predictions:
+        if i >= 3:
             break
 
         # Display avatar
         image_path = f"assets/avatar_{author}.jpg"
         avatar_caption = f"#{i + 1} - {author}"
-        with columns[i % num_columns]:
-            st.image(image_path, width=avatar_size, caption=avatar_caption, use_column_width=False, output_format="auto")
+        st.image(image_path, width=avatar_size, caption=avatar_caption, use_column_width=False, output_format="auto")
 
 if __name__ == "__main__":
     main()
